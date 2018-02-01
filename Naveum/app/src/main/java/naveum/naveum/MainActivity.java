@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         webview = (WebView) findViewById(R.id.webview);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        //webview.loadUrl("https://www.google.it");
+        webview.loadUrl("http://cmanfredi.github.io/naveum");
         setContentView(webview);
         webview.setWebViewClient(new WebViewClient());
 
@@ -55,7 +55,12 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 Log.d(TAG, url);
-                webview.loadUrl(eddystones.get(0).url);
+                if (eddystones.get(0).url == "https://www.twitter.com")
+                    webview.loadUrl("mostra");
+                if (eddystones.get(0).url == "https://www.facebook.com")
+                    webview.loadUrl("https://naveum.link/rooms/1");
+                if (eddystones.get(0).url == "https://www.google.it")
+                webview.loadUrl("https://naveum.link/exhibitions/1");
                 //beaconManager.stopEddystoneDiscovery();
             }
         });
