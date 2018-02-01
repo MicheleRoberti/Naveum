@@ -56,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Log.d(TAG, url);
                 if (eddystones.get(0).url == "https://www.twitter.com")
-                    webview.loadUrl("mostra");
+                    webview.loadUrl("https://naveum.link/exhibitions/1"); // mostra
                 if (eddystones.get(0).url == "https://www.facebook.com")
-                    webview.loadUrl("https://naveum.link/rooms/1");
+                    webview.loadUrl("https://naveum.link/rooms/1"); // stanza
                 if (eddystones.get(0).url == "https://www.google.it")
-                webview.loadUrl("https://naveum.link/exhibitions/1");
+                webview.loadUrl("https://naveum.link/artworks/1"); // opera 
                 //beaconManager.stopEddystoneDiscovery();
             }
         });
