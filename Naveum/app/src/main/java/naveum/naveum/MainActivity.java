@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         webview = (WebView) findViewById(R.id.webview);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        webview.loadUrl("http://cmanfredi.github.io/naveum");
+        webview.loadUrl("https://cmanfredi.github.io/naveum");
         setContentView(webview);
         webview.setWebViewClient(new WebViewClient());
 
@@ -42,8 +42,9 @@ public class MainActivity extends AppCompatActivity {
             public void onEddystonesFound(List<Eddystone> eddystones) {
                //Cerchiamo il più vicino)
                 String url = "";
+                String oldUrl = "";
                 double minDistance, distance;
-                for ( Eddystone eddystone : eddystones) {
+                for (Eddystone eddystone : eddystones) {
                     url = "";
                     minDistance = 10.;
                     distance = utils.computeAccuracy(eddystone);
@@ -55,12 +56,25 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 Log.d(TAG, url);
-                if (eddystones.get(0).url == "https://www.twitter.com")
-                    webview.loadUrl("https://naveum.link/exhibitions/1"); // mostra
-                if (eddystones.get(0).url == "https://www.facebook.com")
-                    webview.loadUrl("https://naveum.link/rooms/1"); // stanza
-                if (eddystones.get(0).url == "https://www.google.it")
-                webview.loadUrl("https://naveum.link/artworks/1"); // opera 
+                if(url != oldUrl) {
+                    oldUrl = url;
+                    switch (url) {
+                        case "https://www.twitter.com":
+                            webview.loadUrl("javascript:window.loadUrl(\"https://naveum.link/exhibitions/1\")");
+                            break;
+                        case "https://www.facebook.com":
+                            webview.loadUrl("javascript:window.loadUrl(\"https://naveum.link/rooms/1\")");
+                            break;
+                        case "https://www.google.it":
+                            webview.loadUrl("javascript:window.loadUrl(\"https://naveum.link/artworks/1\")");
+                            break;
+                        case "https://www.instagram.com":
+                            webview.loadUrl("javascript:window.loadUrl(\"https://naveum.link/artworks/2\")");
+                            break;
+                        default:
+                            webview.loadUrl("javascript:window.loadUrl(\"" + url + "\")");
+                    }
+                }
                 //beaconManager.stopEddystoneDiscovery();
             }
         });
